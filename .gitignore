@@ -1,0 +1,15 @@
+/bin/
+/outputs/
+/dist/
+/.wrangler/
+/data/
+.env
+.env.*
+*.key
+*.pem
+*.db
+*.db.lock
+/coverage.out
+
+personal-api-key
+__pycache__/
