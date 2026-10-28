@@ -24,7 +24,10 @@ def archive(entries):
             info = tarfile.TarInfo(name)
             info.size, info.mode, info.mtime = len(data), mode, 0
             target.addfile(info, io.BytesIO(data))
-    return gzip.compress(buffer.getvalue(), mtime=0)
+    compressed = io.BytesIO()
+    with gzip.GzipFile(filename="", mode="wb", fileobj=compressed, mtime=0) as target:
+        target.write(buffer.getvalue())
+    return compressed.getvalue()
 
 
 def source_files(root):

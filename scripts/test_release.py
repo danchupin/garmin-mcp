@@ -11,6 +11,7 @@ class ReleaseTests(unittest.TestCase):
     def test_archive_is_deterministic_and_preserves_executable_mode(self):
         entries = {"LICENSE": (b"synthetic-license", 0o644), "garmin-mcp": (b"synthetic-binary", 0o755)}
         first = archive(entries)
+        self.assertEqual(first[9], 255)  # Portable gzip OS header, independent of the builder.
         self.assertEqual(first, archive(dict(reversed(list(entries.items())))))
         with tarfile.open(fileobj=io.BytesIO(first), mode="r:gz") as result:
             self.assertEqual(result.getnames(), ["LICENSE", "garmin-mcp"])
