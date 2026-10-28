@@ -12,7 +12,7 @@ import (
 	"unicode"
 	"unicode/utf8"
 
-	"github.com/danchupin/garmin-personal-mcp/internal/domain"
+	"github.com/danchupin/garmin-mcp/internal/domain"
 )
 
 type Error = domain.Error

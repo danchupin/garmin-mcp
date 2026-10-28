@@ -6,7 +6,7 @@ import (
 	"os"
 	"strings"
 
-	"github.com/danchupin/garmin-personal-mcp/internal/domain"
+	"github.com/danchupin/garmin-mcp/internal/domain"
 )
 
 func ReadPrivateFile(path string, maximum int64) ([]byte, error) {

@@ -1,12 +1,14 @@
 # Validation coverage
 
+This validation applies to personal mode over the official Garmin Connect Personal API. Business API integrations and shared multi-user hosting are not implemented.
+
 ## Automated checks
 
 `make check` runs gofmt validation, Go tests with the race detector, go vet, go mod verify and release-packaging tests. Tests use synthetic credentials and require no Garmin key.
 
 Coverage includes official MCP SDK subprocess transport, current/legacy protocol handling, schemas, scopes, identity/credential injection rejection, projections and missing data, output/response limits, export ownership/expiry, safe errors and secret-free diagnostics. Clock-controlled tests cover temporary-token renewal, concurrent exchanges, key rotation and a newly started credential source. Packaging tests check archive ordering, permissions, source inclusion and private-file exclusion.
 
-The GitHub workflows also run govulncheck and a redacted gitleaks scan. Workflow configuration alone is not evidence of a passing remote run; inspect the [Actions results](https://github.com/danchupin/garmin-personal-mcp/actions) for the exact commit.
+The GitHub workflows also run govulncheck and a redacted gitleaks scan. Workflow configuration alone is not evidence of a passing remote run; inspect the [Actions results](https://github.com/danchupin/garmin-mcp/actions) for the exact commit.
 
 ## Live smoke tests
 

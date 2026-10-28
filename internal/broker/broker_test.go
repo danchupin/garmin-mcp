@@ -9,7 +9,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/danchupin/garmin-personal-mcp/internal/domain"
+	"github.com/danchupin/garmin-mcp/internal/domain"
 )
 
 type clientFunc func(context.Context, string, map[string]any) (domain.PersonalResult, error)

@@ -1,4 +1,4 @@
-module github.com/danchupin/garmin-personal-mcp
+module github.com/danchupin/garmin-mcp
 
 go 1.26.0
 

@@ -18,7 +18,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/danchupin/garmin-personal-mcp/internal/app"
+	"github.com/danchupin/garmin-mcp/internal/app"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
 

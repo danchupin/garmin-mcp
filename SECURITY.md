@@ -2,13 +2,13 @@
 
 ## Reporting a vulnerability
 
-Report vulnerabilities privately using [GitHub private vulnerability reporting](https://github.com/danchupin/garmin-personal-mcp/security/advisories/new). Do not open a public issue for an unpatched vulnerability. Include affected versions, impact and a minimal reproduction with synthetic credentials and records. Never include a real Garmin key, access token, account identifier, health record or export URI.
+Report vulnerabilities privately using [GitHub private vulnerability reporting](https://github.com/danchupin/garmin-mcp/security/advisories/new). Do not open a public issue for an unpatched vulnerability. Include affected versions, impact and a minimal reproduction with synthetic credentials and records. Never include a real Garmin key, access token, account identifier, health record or export URI.
 
 Only the latest published release receives security fixes. This is a community project without a guaranteed response time. An independent security audit has not been performed.
 
 ## Trust boundary
 
-This is a local stdio server launched by a trusted MCP client as the current macOS/Linux user. It does not open a listening port, host remote users, provide HTTP/OAuth or use a user database. Trust your MCP client and the code it can run locally.
+Only personal mode is supported: a local stdio process accesses one user's own account through the official Garmin Connect Personal API. A trusted MCP client launches the process as the current macOS/Linux user. It does not open a listening port, host remote users, provide HTTP/OAuth or use a user database. Trust your MCP client and the code it can run locally.
 
 ## Credentials
 
