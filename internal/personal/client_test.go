@@ -13,7 +13,7 @@ import (
 	"testing"
 	"time"
 
-	"github.com/danchupin/garmin-personal-mcp/internal/domain"
+	"github.com/danchupin/garmin-mcp/internal/domain"
 )
 
 const syntheticKey = "synthetic-personal-key-never-real"

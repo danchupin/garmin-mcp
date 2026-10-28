@@ -15,7 +15,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/danchupin/garmin-personal-mcp/internal/domain"
+	"github.com/danchupin/garmin-mcp/internal/domain"
 )
 
 const tokenPath = "/personalapitoken-service/personal-api/personal-api-key/token"

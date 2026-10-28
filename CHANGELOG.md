@@ -1,5 +1,14 @@
 # Changelog
 
+## 0.3.1 — 2026-10-28
+
+- Rename the repository, Go module and MCP implementation to `garmin-mcp`.
+- Update installation commands and project links for the new module path.
+- State that only personal mode is currently supported and all Garmin access uses the official Garmin Connect Personal API.
+- Keep documentation and contribution guidance in English; remove the duplicate Russian guide.
+
+The executable name and local credential-file location are unchanged.
+
 ## 0.3.0 — 2026-10-28
 
 First public release.

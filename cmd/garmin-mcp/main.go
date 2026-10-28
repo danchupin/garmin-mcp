@@ -11,11 +11,11 @@ import (
 	"syscall"
 	"time"
 
-	"github.com/danchupin/garmin-personal-mcp/internal/app"
-	"github.com/danchupin/garmin-personal-mcp/internal/broker"
-	"github.com/danchupin/garmin-personal-mcp/internal/domain"
-	"github.com/danchupin/garmin-personal-mcp/internal/mcpserver"
-	"github.com/danchupin/garmin-personal-mcp/internal/personal"
+	"github.com/danchupin/garmin-mcp/internal/app"
+	"github.com/danchupin/garmin-mcp/internal/broker"
+	"github.com/danchupin/garmin-mcp/internal/domain"
+	"github.com/danchupin/garmin-mcp/internal/mcpserver"
+	"github.com/danchupin/garmin-mcp/internal/personal"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 	"golang.org/x/term"
 )

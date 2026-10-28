@@ -1,8 +1,10 @@
-# Garmin Personal MCP
+# Garmin MCP
 
-A local, read-only MCP server for the official Garmin Connect Personal API, written in Go. Connect your own Garmin data to Codex or another MCP client that supports stdio.
+A local, read-only MCP server written in Go. Connect your own Garmin data to Codex or another MCP client that supports stdio.
 
-[Русская инструкция](docs/README.ru.md) · [Releases](https://github.com/danchupin/garmin-personal-mcp/releases) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
+**Only personal mode is currently supported.** Each local process reads one user's own account through the **official Garmin Connect Personal API**. Business API integrations and shared multi-user servers are not implemented. All Garmin requests use official API endpoints; there is no scraping, browser-login flow or unofficial Garmin client.
+
+[Releases](https://github.com/danchupin/garmin-mcp/releases) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
 - **Official API:** 26 allowlisted GET operations for wellness, activities and original activity files.
 - **Local credentials:** enter your Personal API key once in a terminal with hidden input. Temporary access tokens renew automatically.
@@ -13,12 +15,12 @@ Independent project; not affiliated with or endorsed by Garmin. The MIT license 
 
 ## Install
 
-Download the archive for your platform from [Releases](https://github.com/danchupin/garmin-personal-mcp/releases/latest), compare its SHA-256 with `SHA256SUMS`, and extract it into a directory you control. macOS arm64/amd64 and Linux arm64/amd64 builds are provided. Release binaries are not signed or notarized.
+Download the archive for your platform from [Releases](https://github.com/danchupin/garmin-mcp/releases/latest), compare its SHA-256 with `SHA256SUMS`, and extract it into a directory you control. macOS arm64/amd64 and Linux arm64/amd64 builds are provided. Release binaries are not signed or notarized.
 
 Alternatively, install from the published Go module:
 
 ```sh
-GOBIN="$HOME/.local/bin" go install github.com/danchupin/garmin-personal-mcp/cmd/garmin-mcp@v0.3.0
+GOBIN="$HOME/.local/bin" go install github.com/danchupin/garmin-mcp/cmd/garmin-mcp@v0.3.1
 "$HOME/.local/bin/garmin-mcp" login
 codex mcp add garmin -- "$HOME/.local/bin/garmin-mcp" stdio
 ```
@@ -28,14 +30,18 @@ Go selects the toolchain required by the module. Restart the `garmin` MCP server
 For a source checkout:
 
 ```sh
-git clone https://github.com/danchupin/garmin-personal-mcp.git
-cd garmin-personal-mcp
+git clone https://github.com/danchupin/garmin-mcp.git
+cd garmin-mcp
 make build
 ./bin/garmin-mcp login
 codex mcp add garmin -- "$PWD/bin/garmin-mcp" stdio
 ```
 
 `login` verifies the key directly with Garmin before saving it. Never paste the key into a chat, tool argument, URL or issue. There is no setup website, account registration or OAuth provider. Running the binary without arguments also starts stdio.
+
+## Upgrade from v0.3.0
+
+The repository and Go module are now named `github.com/danchupin/garmin-mcp`. Use the v0.3.1 installation command above. The executable name, stdio configuration and local credential-file location are unchanged.
 
 ## Credentials and configuration
 

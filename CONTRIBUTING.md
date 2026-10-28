@@ -2,6 +2,12 @@
 
 Bug reports, documentation improvements and focused pull requests are welcome. By contributing, you agree that your contribution is distributed under the project's MIT license.
 
+## Project scope and documentation
+
+Garmin MCP currently supports personal mode only: a local stdio process reads the user's own data through the official Garmin Connect Personal API. Contributions must use documented official API operations. Business API support and shared multi-user hosting are not implemented; discuss such scope changes before proposing them.
+
+Write documentation, contribution guides, issue templates and pull request descriptions in English. Lead with the user task, give complete commands, and distinguish supported behavior from plans or unverified assumptions. Keep API names, units, limits and security conditions accurate.
+
 ## Report a problem
 
 Search existing issues first. Include the release or commit, OS/architecture, MCP client, operation name, expected behavior and a minimal reproduction using synthetic data. Do not post API keys, access tokens, exported resource URIs, account IDs or health records. Report security vulnerabilities privately as described in [SECURITY.md](SECURITY.md).
@@ -11,8 +17,8 @@ An upstream failure is not proof of missing data. Keep missing values distinct f
 ## Build and test
 
 ```sh
-git clone https://github.com/danchupin/garmin-personal-mcp.git
-cd garmin-personal-mcp
+git clone https://github.com/danchupin/garmin-mcp.git
+cd garmin-mcp
 make check
 make build
 ```

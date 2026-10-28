@@ -5,7 +5,7 @@ import (
 	"sync"
 	"time"
 
-	"github.com/danchupin/garmin-personal-mcp/internal/domain"
+	"github.com/danchupin/garmin-mcp/internal/domain"
 )
 
 // NewLocalKeySource keeps only the temporary token in RAM and rereads the local key when renewal is needed.

@@ -11,8 +11,8 @@ import (
 	"testing"
 	"time"
 
-	"github.com/danchupin/garmin-personal-mcp/internal/domain"
-	"github.com/danchupin/garmin-personal-mcp/internal/personal"
+	"github.com/danchupin/garmin-mcp/internal/domain"
+	"github.com/danchupin/garmin-mcp/internal/personal"
 	"github.com/google/jsonschema-go/jsonschema"
 	"github.com/modelcontextprotocol/go-sdk/mcp"
 )
