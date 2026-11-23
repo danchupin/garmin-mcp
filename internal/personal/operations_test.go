@@ -24,11 +24,11 @@ func TestRegistryCoversOfficialSnapshot(t *testing.T) {
 	if err := json.Unmarshal(data, &snapshot); err != nil {
 		t.Fatal(err)
 	}
-	if len(snapshot.Operations) != 26 || len(Operations()) != 26 {
+	if len(snapshot.Operations) != 26 || len(DocumentedOperations()) != 26 {
 		t.Fatal("expected all 26 documented GET operations")
 	}
 	byPath := map[string]Operation{}
-	for _, op := range Operations() {
+	for _, op := range DocumentedOperations() {
 		byPath[op.Path] = op
 	}
 	for _, expected := range snapshot.Operations {

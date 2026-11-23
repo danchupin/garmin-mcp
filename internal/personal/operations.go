@@ -38,9 +38,12 @@ type Operation struct {
 	Binary        bool           `json:"binary"`
 	InputSchema   map[string]any `json:"input_schema"`
 	MaxWindowDays int            `json:"max_window_days,omitempty"`
-	parameters    map[string]parameter
-	rangeStart    string
-	rangeEnd      string
+	// Derived names a local transformation of a documented endpoint's response.
+	// Derived operations reuse a documented path and are not part of the official snapshot.
+	Derived    string `json:"-"`
+	parameters map[string]parameter
+	rangeStart string
+	rangeEnd   string
 }
 
 var digits = regexp.MustCompile(`^[0-9]{1,20}$`)
@@ -162,9 +165,30 @@ var operations = []Operation{
 	makeOperation("spo2", "/wellness-service/wellness/daily/spo2acclimation/{calendarDate}", "wellness", map[string]parameter{"calendarDate": required("date")}, "", "", 0),
 	makeOperation("heart_rate", "/wellness-service/wellness/dailyHeartRate", "wellness", map[string]parameter{"date": optional("date")}, "", "", 0),
 	rangeOperation("wellness_activities", "/wellnessactivity-service/activity/summary/range/{fromDate}/{untilDate}", "wellness", "fromDate", "untilDate", 0, nil),
+	activitySetsOperation(),
+}
+
+// activitySetsOperation reads the original activity file (same endpoint and scope as
+// activity_file) and returns its FIT set messages as JSON: per-set repetitions, weight,
+// duration, rest periods and heart rate.
+func activitySetsOperation() Operation {
+	op := makeOperation("activity_sets", "/download-service/files/activity/{activityId}", "activities", map[string]parameter{"activityId": required("identifier")}, "", "", 0)
+	op.Scope, op.Derived = "activities:export", derivedFITSets
+	return op
 }
 
 func Operations() []Operation { return append([]Operation(nil), operations...) }
+
+// DocumentedOperations returns only operations that map one-to-one to the official API snapshot.
+func DocumentedOperations() []Operation {
+	var result []Operation
+	for _, op := range operations {
+		if op.Derived == "" {
+			result = append(result, op)
+		}
+	}
+	return result
+}
 
 func GetOperation(id string) (Operation, error) {
 	for _, op := range operations {

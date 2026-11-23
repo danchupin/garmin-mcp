@@ -42,7 +42,7 @@ func outputSchema(name string) map[string]any {
 			"id": identifier(), "group": identifier(), "scope": identifier(), "binary": boolean,
 			"input_schema": map[string]any{"type": "object", "additionalProperties": true},
 		}, "id", "group", "scope", "binary")
-		return object(map[string]any{"source": source, "operations": map[string]any{"type": "array", "maxItems": 26, "items": operation}}, "source", "operations")
+		return object(map[string]any{"source": source, "operations": map[string]any{"type": "array", "maxItems": len(personal.Operations()), "items": operation}}, "source", "operations")
 	case "read_garmin":
 		artifact := object(map[string]any{
 			"id": identifier(), "uri": text, "name": text, "mimeType": text, "size": count,

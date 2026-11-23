@@ -338,8 +338,9 @@ func (c *Client) Execute(ctx context.Context, operationID string, args map[strin
 	if err != nil {
 		return Result{}, err
 	}
+	file := op.Binary || op.Derived == derivedFITSets
 	maximum := int64(jsonBytes)
-	if op.Binary {
+	if file {
 		maximum = fileBytes
 	}
 	response, err := c.request(operationCtx, http.MethodGet, path, "Bearer "+first, maximum)
@@ -347,7 +348,7 @@ func (c *Client) Execute(ctx context.Context, operationID string, args map[strin
 		return Result{}, err
 	}
 	if response.status == http.StatusNoContent {
-		if op.Binary {
+		if file {
 			return Result{}, domain.NewError("GARMIN_NOT_FOUND", "No Garmin activity file is available.", 404)
 		}
 		return Result{Kind: "json"}, nil
@@ -359,6 +360,16 @@ func (c *Client) Execute(ctx context.Context, operationID string, args map[strin
 			c.mu.Unlock()
 		}
 		return Result{}, upstreamError(response.status)
+	}
+	if op.Derived == derivedFITSets {
+		if len(response.data) == 0 {
+			return Result{}, noFITFile()
+		}
+		payload, err := decodeFITSets(response.data)
+		if err != nil {
+			return Result{}, err
+		}
+		return Result{Kind: "json", Data: payload}, nil
 	}
 	if op.Binary {
 		if len(response.data) == 0 {

@@ -6,7 +6,7 @@ A local, read-only MCP server written in Go. Connect your own Garmin data to Cod
 
 [Releases](https://github.com/danchupin/garmin-mcp/releases) · [Security](SECURITY.md) · [Contributing](CONTRIBUTING.md)
 
-- **Official API:** 26 allowlisted GET operations for wellness, activities and original activity files.
+- **Official API:** 26 allowlisted GET operations for wellness, activities and original activity files, plus `activity_sets`, a JSON view of the sets inside the original activity file.
 - **Local credentials:** enter your Personal API key once in a terminal with hidden input. Temporary access tokens renew automatically.
 - **Small tool catalogue:** three tools, field selection, bounded previews and explicit truncation metadata.
 - **No hosted service:** one Go binary, stdio, no database or persistent health-data cache.
@@ -90,7 +90,9 @@ Example prompts:
 
 Discover an operation's schema before calling it. Keep Garmin calendar dates in the user's timezone. Missing values remain missing. Preview limits are 16 KiB, depth 8, 24 keys per object and 50 array items; `projection` reports omitted paths and array pages. Selected array fields retain aligned rows. Integers outside the safe JSON-number range are represented as strings.
 
-`export_json: true` and `activity_file` return MCP resource links. `resources/read` fetches fresh data from Garmin rather than reading a stored snapshot. Links require the current process and matching scopes, expire within ten minutes and stop working after a restart. Full binary exports require a client supporting MCP resources and messages up to 36 MiB. The server does not unpack or execute downloaded files.
+`export_json: true` and `activity_file` return MCP resource links. `resources/read` fetches fresh data from Garmin rather than reading a stored snapshot. Links require the current process and matching scopes, expire within ten minutes and stop working after a restart. Full binary exports require a client supporting MCP resources and messages up to 36 MiB. The server never executes downloaded files; `activity_file` is returned as-is.
+
+`activity_sets` (scope `activities:export`) downloads the same original activity file, decodes its FIT `set` messages in memory and returns JSON: one entry per active set or rest with `type`, `categories`, `repetitions`, `weightKg`, `durationSeconds`, `startTime`/`endTime` and the average/maximum heart rate from FIT records in that window. Values the file does not contain are omitted; `categories` is omitted when the watch did not recognise the exercise (Garmin Connect may still name it server-side in `summarizedExerciseSets`). The file holds what the watch recorded; edits made later in Garmin Connect are not part of it. Use it when `summarizedExerciseSets` from `activities` is too coarse, for example to see repetitions per set.
 
 MCP versions `2026-07-28` and `2025-11-25` are supported. The newer protocol uses short text plus structured content; the older protocol receives a JSON text fallback.
 
