@@ -1,5 +1,10 @@
 # Changelog
 
+## Unreleased
+
+- Add `activity_sets`: decodes FIT `set` messages from the original activity file (same endpoint and `activities:export` scope as `activity_file`) and returns per-set type, exercise category, repetitions, weight, duration, time window and heart rate as JSON.
+- Add the `github.com/muktihari/fit` dependency for FIT decoding.
+
 ## 0.3.1 — 2026-10-28
 
 - Rename the repository, Go module and MCP implementation to `garmin-mcp`.
